@@ -1,0 +1,36 @@
+# dataset config : General Recommendation
+data_path: Simulation/tmp/
+dataset: SSN_P
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+load_col:
+    inter: [user_id, item_id]
+  
+# model config
+embedding_size: 64
+
+# Training and evaluation config
+seed: 42
+repeatable: True
+epochs: 20
+learner: adam
+learning_rate: 0.001
+train_batch_size: 4096
+eval_batch_size: 4096
+train_neg_sample_args:
+    distribution: uniform
+    sample_num: 1
+    alpha: 1.0
+    dynamic: False
+    candidate_num: 0
+eval_args:
+    group_by: user
+    order: RO
+    split: {'RS': [0.9,0.05,0.05]}
+    mode: uni10
+metrics: ['Recall', 'MRR', 'NDCG', 'Hit', 'Precision']
+topk: 10
+valid_metric: MRR@10
+metric_decimal_place: 4
+
+device: cuda:2

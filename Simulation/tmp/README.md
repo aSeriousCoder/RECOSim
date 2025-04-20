@@ -1,0 +1,1 @@
+This dir would cache some variables of the simulation, such as the dataset build for training DeepRec. 
